@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import ComponentsContainer from "./Components/ComponentsContainer";
+import MainComponentContainer from "./Components/MainComponentContainer";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [selectedComponent, setSelectedComponent] = useState();
+    const onComponentSelect = (c) => {
+        setSelectedComponent(c)
+    }
+
+    const deleteSelectedComponent = () => {
+        setSelectedComponent(null)
+    }
+
+    return (
+        <div className="app">
+            <ComponentsContainer onSelect={(c) => onComponentSelect(c)}/>
+            <MainComponentContainer component={selectedComponent} deleteComponent={deleteSelectedComponent}/>
+
+        </div>
+    );
 }
 
 export default App;
